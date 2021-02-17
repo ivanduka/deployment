@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  deployment:
+    image: ivanduka/deployment:201
+    ports:
+      - 3333:3333
+    environment:
+      SLEEP: 1
+    healthcheck:
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: stop-first
+        failure_action: rollback
+        monitor: 5s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 15s
+      rollback_config:
+        parallelism: 1
+        delay: 5s
+        monitor: 5s
+        order: stop-first
