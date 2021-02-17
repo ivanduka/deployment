@@ -3,6 +3,7 @@ version: '3.7'
 services:
   deployment:
     image: ivanduka/deployment:200
+    privileged: true
     ports:
       - 3333:3333
     environment:
