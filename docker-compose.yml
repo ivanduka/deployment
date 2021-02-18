@@ -3,8 +3,8 @@ version: '3.7'
 services:
   deployment:
     image: ivanduka/deployment:200
-#    ports:
-#      - 3333:3333
+    ports:
+      - 3333:3333
     networks:
       - host_
     environment:
@@ -32,8 +32,3 @@ services:
         delay: 5s
         monitor: 5s
         order: start-first
-
-networks:
-  host_:
-    external:
-      name: host
