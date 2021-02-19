@@ -32,7 +32,7 @@ jobs:
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Output variables
         run: |
-          echo "OUTPUT: ivanduka/deployment:$(cat DOCKERFILE_NAME)"
+          echo "OUTPUT: ivanduka/deployment:$(cat SHORT_SHA)"
           echo "OUTPUT: $(cat CURRENT_TIMESTAMP)"
 #      - name: Build and push
 #        uses: docker/build-push-action@v2
