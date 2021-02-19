@@ -41,4 +41,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ivanduka/deployment:${{ SHORT_SHA }}
+          tags: ivanduka/deployment:${{ env.SHORT_SHA }}
