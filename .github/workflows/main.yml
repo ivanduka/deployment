@@ -39,7 +39,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
   deploy:
     name: Deploy to target machine
-    needs: setup
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - name: Test global variables availability
