@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "OUTPUT: ivanduka/deployment:$(cat SHORT_SHA)"
           echo "OUTPUT: $(cat CURRENT_TIMESTAMP)"
-          random_variable=$(cat CURRENT_TIMESTAMP)
+          export random_variable=$(cat CURRENT_TIMESTAMP)
           echo "random_variable: $random_variable"
 #      - name: Build and push
 #        uses: docker/build-push-action@v2
