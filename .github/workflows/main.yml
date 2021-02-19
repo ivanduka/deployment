@@ -25,6 +25,7 @@ jobs:
         run: |
           date +'%Y-%m-%dT%H:%M:%S' > CURRENT_TIMESTAMP
           echo $GITHUB_SHA | cut -c1-8 > SHORT_SHA
+          export random_variable=$(cat CURRENT_TIMESTAMP)
 #      - name: Login to DockerHub
 #        uses: docker/login-action@v1
 #        with:
@@ -34,7 +35,6 @@ jobs:
         run: |
           echo "OUTPUT: ivanduka/deployment:$(cat SHORT_SHA)"
           echo "OUTPUT: $(cat CURRENT_TIMESTAMP)"
-          export random_variable=$(cat CURRENT_TIMESTAMP)
           echo "random_variable: $random_variable"
 #      - name: Build and push
 #        uses: docker/build-push-action@v2
