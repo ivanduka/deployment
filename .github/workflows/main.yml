@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: set_vars
         run: |
-          TZ=America/New_York date
+          TZ=America/Vancouver
           date +'%Y-%m-%dT%H:%M:%S' > CURRENT_TIMESTAMP
           echo $GITHUB_SHA | cut -c1-8 > SHORT_SHA
 #      - name: Login to DockerHub
