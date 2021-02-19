@@ -21,7 +21,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} ivanduka/deployment:latest
+          tags: |
+            ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
+            ivanduka/deployment:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       - name: executing remote ssh commands
