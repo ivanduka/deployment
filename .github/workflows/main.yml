@@ -21,8 +21,8 @@ jobs:
     name: Build image and upload it to Docker Hub
     runs-on: ubuntu-20.04
     env:
-      CURRENT_DATETIME: "$(date +'%Y-%m-%dT%H:%M:%S')"
-      SHORT_SHA: "${GITHUB_SHA} | cut -c1-8"
+      CURRENT_DATETIME: $(date +'%Y-%m-%dT%H:%M:%S')
+      SHORT_SHA: ${GITHUB_SHA} | cut -c1-8
     steps:
 #      - name: Login to DockerHub
 #        uses: docker/login-action@v1
