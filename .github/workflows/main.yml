@@ -36,11 +36,13 @@ jobs:
           echo "OUTPUT: ivanduka/deployment:$(cat SHORT_SHA)"
           echo "OUTPUT: $(cat CURRENT_TIMESTAMP)"
           echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-10)" >> $GITHUB_ENV
-          echo $GITHUB_SHA_SHORT
-          echo $env.GITHUB_SHA_SHORT
+          echo ${{env.GITHUB_SHA_SHORT}}
+          echo ${{ env.GITHUB_SHA_SHORT }}
+          echo ${{ $env.GITHUB_SHA_SHORT }}
+          echo ${{$env.GITHUB_SHA_SHORT}}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
+          tags: ivanduka/deployment:${{env.GITHUB_SHA_SHORT}}
