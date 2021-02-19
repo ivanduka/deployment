@@ -31,8 +31,8 @@ jobs:
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Output variables
         run: |
-          echo "ivanduka/deployment:${SHORT_SHA}"
-          echo "${CURRENT_DATETIME}"
+          echo "OUTPUT: ivanduka/deployment:${SHORT_SHA}"
+          echo "OUTPUT: ${CURRENT_DATETIME}"
 #      - name: Build and push
 #        uses: docker/build-push-action@v2
 #        with:
