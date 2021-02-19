@@ -37,16 +37,6 @@ jobs:
           tags: ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  deploy:
-    name: Deploy to target machine
-    needs: build
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Test global variables availability
-        run: |
-          echo ${{ steps.docker_build.outputs.digest }}
-          echo ${{ env.GITHUB_SHA_SHORT }}
-          echo "OUTPUT: ivanduka/deployment:$(cat SHORT_SHA)"
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:
@@ -55,4 +45,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            whoami
+            sudo docker service update deployment_deployment --image=ivanduka/deployment:${{ steps.docker_build.outputs
+            .digest }}
