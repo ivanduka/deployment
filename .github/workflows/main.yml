@@ -21,8 +21,8 @@ jobs:
     name: Build image and upload it to Docker Hub
     runs-on: ubuntu-20.04
     env:
-      CURRENT_DATETIME: $(date +'%Y-%m-%dT%H:%M:%S')
-      SHORT_SHA: ${GITHUB_SHA} | cut -c1-8
+      CURRENT_DATETIME: (date +'%Y-%m-%dT%H:%M:%S')
+      SHORT_SHA: $GITHUB_SHA | cut -c1-8
     steps:
 #      - name: Login to DockerHub
 #        uses: docker/login-action@v1
@@ -31,8 +31,8 @@ jobs:
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Output variables
         run: |
-          echo "OUTPUT: ivanduka/deployment:${SHORT_SHA}"
-          echo "OUTPUT: ${CURRENT_DATETIME}"
+          echo "OUTPUT: ivanduka/deployment:$SHORT_SHA"
+          echo "OUTPUT: $CURRENT_DATETIME"
 #      - name: Build and push
 #        uses: docker/build-push-action@v2
 #        with:
