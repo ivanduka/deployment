@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Set variables
-      - run: |
+        run: |
           $(date +'%Y-%m-%dT%H:%M:%S') > CURRENT_TIMESTAMP
           ${env.GITHUB_SHA} | cut -c1-8 > SHORT_SHA
 #      - name: Login to DockerHub
