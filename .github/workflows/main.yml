@@ -45,5 +45,4 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            sudo docker service update deployment_deployment --image=ivanduka/deployment:${{ steps.docker_build.outputs
-            .digest }}
+            sudo docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
