@@ -35,5 +35,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             sudo docker service update deployment_deployment --replicas=2
-            sudo docker service update deployment_deployment --image=nginx/${{ env.GITHUB_SHA_SHORT }}
+            sudo docker service update deployment_deployment --image=nginx2/${{ env.GITHUB_SHA_SHORT }}
             sudo docker service update deployment_deployment --replicas=1
