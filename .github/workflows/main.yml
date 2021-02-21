@@ -14,8 +14,17 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script: docker service update deployment_deployment --image=ivanduka/deployment:fail | grep -i rollback \
-            && exit 1 || echo "ALL GOOD"
+          script: |
+            docker service update deployment_deployment --image=ivanduka/deployment:201 | grep -i roll
+            export rollback=$?
+            docker service ps deployment_deployment
+            if [ $rollback = 1 ];
+              then
+                echo "SUCCESS! (no rollback)"
+              else
+                echo "FAIL! (rollback observed)"
+                exit 1
+            fi
 
 #      - name: Set Variables
 #        run: |
