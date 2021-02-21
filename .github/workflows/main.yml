@@ -72,5 +72,5 @@ jobs:
           script:  |
             cd deployment
             export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
-            docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} | grep -i rollback && exit 1
-            echo "ALL GOOD"
+            docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} |
+              grep -i rollback && echo 'ROLLBACK!'; exit 1 || echo "NO ROLLBACK. ALL GOOD!"
