@@ -14,7 +14,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script: docker service update deployment_deployment --image=ivanduka/deployment:201
+          script: docker service update deployment_deployment --image=ivanduka/deployment:fail
 
 #      - name: Set Variables
 #        run: |
