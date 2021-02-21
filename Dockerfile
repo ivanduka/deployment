@@ -18,7 +18,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -ldflags="-s -w" -race -o ./out/deployment.app . && upx ./out/deployment.app -9
+RUN go build -ldflags="-s -w" -race -o ./out/deployment.app . && upx ./out/deployment.app
 
 ###################################################
 # Building the healthcheck utility
@@ -34,7 +34,7 @@ COPY ./healthcheck/. .
 RUN go mod download
 
 # Build the Go app with 'no debugging info' flags
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./out/healthcheck.app . && upx ./out/healthcheck.app -9
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o ./out/healthcheck.app . && upx ./out/healthcheck.app
 
 ###################################################
 # Putting it all together in a new container
