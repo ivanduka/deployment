@@ -52,5 +52,5 @@ jobs:
           script: |
             sudo su
             cd deployment
-            export GITHUB_SHA_SHORT=${{ GITHUB_SHA_SHORT }}
+            export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
             docker stack deploy -c docker-compose.yml deployment
