@@ -34,9 +34,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker service update deployment_deployment --replicas=2
             docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} > output
-            docker service update deployment_deployment --replicas=1
             cat ./output
             echo # for extra line
 
