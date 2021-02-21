@@ -4,29 +4,32 @@ jobs:
     name: Build image, upload it to Docker Hub, and deploy to server
     runs-on: ubuntu-20.04
     steps:
-#      - name: Set Variables
-#        run: |
-#          export TZ=America/Vancouver
-#          echo "CURRENT_TIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-#          echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-8)" >> $GITHUB_ENV
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v1
-#      - name: Login to DockerHub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#      - name: Build and push
-#        id: docker_build
-#        uses: docker/build-push-action@v2
-#        with:
-#          push: true
-#          tags: |
-#            ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
-#            ivanduka/deployment:latest
-#      - name: Image digest
-#        run: echo ${{ steps.docker_build.outputs.digest }}
-      - uses: actions/checkout@main # CHANGE TO DYNAMIC VALUE!!!
+      - uses: actions/checkout@v2
+
+      - name: Set Variables
+        run: |
+          export TZ=America/Vancouver
+          echo "CURRENT_TIMESTAMP=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+          echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-8)" >> $GITHUB_ENV
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
+            ivanduka/deployment:latest
+
       - name: copy file via ssh
         uses: appleboy/scp-action@master
         with:
@@ -38,16 +41,16 @@ jobs:
           source: "docker-compose.yml"
           target: "deployment"
 
-#      - name: executing remote ssh commands
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.REMOTE_HOST }}
-#          username: ${{ secrets.REMOTE_USER }}
-#          key: ${{ secrets.SERVER_SSH_KEY }}
-#          port: ${{ secrets.PORT }}
-#          script_stop: true
-#          script: |
-#            sudo su
-#            cd deployment
-#            export GITHUB_SHA_SHORT=${{ GITHUB_SHA_SHORT }}
-#            docker stack deply -c docker-compose deployment
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            sudo su
+            cd deployment
+            export GITHUB_SHA_SHORT=${{ GITHUB_SHA_SHORT }}
+            docker stack deploy -c docker-compose.yml deployment
