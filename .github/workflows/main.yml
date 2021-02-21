@@ -59,7 +59,7 @@ jobs:
           push: true
           tags: |
             ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
-            ivanduka/deployment:latest
+            ivanduka/deployment:prod
 
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@master
@@ -72,4 +72,4 @@ jobs:
           script:  |
             cd deployment
             export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
-            docker stack deploy -c docker-compose.yml deployment
+            docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
