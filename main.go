@@ -47,7 +47,7 @@ func root(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(200)
+	w.WriteHeader(500)
 	_, _ = fmt.Fprintf(w, "%v is healthy\n", hostname)
 }
 
