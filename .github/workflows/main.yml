@@ -13,11 +13,10 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
-          script_stop: true
           script: |
             docker service update deployment_deployment --image=ivanduka/deployment:200 > output
             cat ./output
-            $(cat ./output | grep -i roll -q)
+            cat ./output | grep -i roll -q
             export rollback=$?
             echo # for extra line
             docker service ps deployment_deployment
