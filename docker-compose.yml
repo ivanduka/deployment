@@ -6,12 +6,12 @@ services:
     ports:
       - 3333:3333
     environment:
-      SLEEP: 7
+      SLEEP: 0
     healthcheck:
-      interval: 5s
-      timeout: 5s
+      interval: 3s
+      timeout: 3s
       retries: 3
-      start_period: 5s
+      start_period: 1s
     deploy:
       replicas: 2
       update_config:
@@ -27,6 +27,6 @@ services:
         window: 15s
       rollback_config:
         parallelism: 1
-        delay: 5s
-        monitor: 5s
+        delay: 2s
+        monitor: 2s
         order: start-first
