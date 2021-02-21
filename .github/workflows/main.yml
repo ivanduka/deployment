@@ -69,9 +69,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script: |
-            sudo su
+          script:  \
             cd deployment
-            echo "whoami: $(whoami)"
             export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
             docker stack deploy -c docker-compose.yml deployment
