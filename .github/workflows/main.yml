@@ -61,15 +61,28 @@ jobs:
           source: "docker-compose.yml"
           target: "deployment"
 
-      - name: executing remote ssh commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.PORT }}
-          script_stop: true
-          script:  \
-            cd deployment
-            export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
-            docker stack deploy -c docker-compose.yml deployment
+  - name: executing remote ssh commands
+    uses: garygrossgarten/github-action-ssh@release
+    with:
+      command: |
+        sudo su
+        cd deployment
+        export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
+        docker stack deploy -c docker-compose.yml deployment
+      host: ${{ secrets.REMOTE_HOST }}
+      username: ${{ secrets.REMOTE_USER }}
+      privateKey: ${{ secrets.SERVER_SSH_KEY }}
+      port: ${{ secrets.PORT }}
+
+#      - name: executing remote ssh commands
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          key: ${{ secrets.SERVER_SSH_KEY }}
+#          port: ${{ secrets.PORT }}
+#          script_stop: true
+#          script:  \
+#            cd deployment
+#            export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
+#            docker stack deploy -c docker-compose.yml deployment
