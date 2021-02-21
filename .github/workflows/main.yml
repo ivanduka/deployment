@@ -14,7 +14,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker service update deployment_deployment --image=ivanduka/deployment:201 > output
+            docker service update deployment_deployment --image=ivanduka/deployment:fail > output
             cat ./output
             cat ./output | grep -i roll -q
             export rollback=$?
