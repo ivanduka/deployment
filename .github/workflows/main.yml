@@ -6,6 +6,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+#      - name: Print vars:
+#        run: |
+#          echo $GITHUB_WORKFLOW
+#          echo GITHUB_RUN_ID
+#          echo GITHUB_RUN_NUMBER
+#          echo GITHUB_ACTION
+#          echo GITHUB_ACTIONS
+#          echo GITHUB_ACTOR
+#          echo GITHUB_REPOSITORY
+#          echo GITHUB_EVENT_NAME
+#          echo GITHUB_EVENT_PATH
+#          echo GITHUB_WORKSPACE
+#          echo GITHUB_SHA
+#          echo GITHUB_REF
+#          echo GITHUB_HEAD_REF
+#          echo GITHUB_BASE_REF
+#          echo GITHUB_SERVER_URL
+#          echo GITHUB_API_URL
+#          echo GITHUB_GRAPHQL_URL
+
       - name: Set Variables
         run: |
           export TZ=America/Vancouver
@@ -52,5 +72,6 @@ jobs:
           script: |
             sudo su
             cd deployment
+            echo "whoami: $(whoami)"
             export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
             docker stack deploy -c docker-compose.yml deployment
