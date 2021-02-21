@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   deployment:
-    image: ivanduka/deployment:${GITHUB_SHA_SHORT}
+    image: ivanduka/deployment
     ports:
       - 3333:3333
     environment:
