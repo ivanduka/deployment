@@ -16,6 +16,7 @@ jobs:
           script_stop: true
           script: |
             whoami
+            echo "$SHELL"
             docker service update deployment_deployment --image=ivanduka/deployment:201 | grep -i roll
             export rollback=$?
             docker service ps deployment_deployment
