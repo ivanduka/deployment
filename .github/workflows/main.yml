@@ -69,7 +69,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script:  \
+          script:  |
             cd deployment
             export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
             docker stack deploy -c docker-compose.yml deployment
