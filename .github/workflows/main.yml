@@ -26,7 +26,7 @@ jobs:
 #            ivanduka/deployment:latest
 #      - name: Image digest
 #        run: echo ${{ steps.docker_build.outputs.digest }}
-
+      - uses: actions/checkout@main # CHANGE TO DYNAMIC VALUE!!!
       - name: copy file via ssh
         uses: appleboy/scp-action@master
         with:
