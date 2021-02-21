@@ -1,4 +1,4 @@
-on: [push]
+on: [ push ]
 jobs:
   build:
     name: Build image, upload it to Docker Hub, and deploy to server
@@ -6,25 +6,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      - name: Print vars:
-#        run: |
-#          echo $GITHUB_WORKFLOW
-#          echo GITHUB_RUN_ID
-#          echo GITHUB_RUN_NUMBER
-#          echo GITHUB_ACTION
-#          echo GITHUB_ACTIONS
-#          echo GITHUB_ACTOR
-#          echo GITHUB_REPOSITORY
-#          echo GITHUB_EVENT_NAME
-#          echo GITHUB_EVENT_PATH
-#          echo GITHUB_WORKSPACE
-#          echo GITHUB_SHA
-#          echo GITHUB_REF
-#          echo GITHUB_HEAD_REF
-#          echo GITHUB_BASE_REF
-#          echo GITHUB_SERVER_URL
-#          echo GITHUB_API_URL
-#          echo GITHUB_GRAPHQL_URL
+      #      - name: Print vars:
+      #        run: |
+      #          echo $GITHUB_WORKFLOW
+      #          echo GITHUB_RUN_ID
+      #          echo GITHUB_RUN_NUMBER
+      #          echo GITHUB_ACTION
+      #          echo GITHUB_ACTIONS
+      #          echo GITHUB_ACTOR
+      #          echo GITHUB_REPOSITORY
+      #          echo GITHUB_EVENT_NAME
+      #          echo GITHUB_EVENT_PATH
+      #          echo GITHUB_WORKSPACE
+      #          echo GITHUB_SHA
+      #          echo GITHUB_REF
+      #          echo GITHUB_HEAD_REF
+      #          echo GITHUB_BASE_REF
+      #          echo GITHUB_SERVER_URL
+      #          echo GITHUB_API_URL
+      #          echo GITHUB_GRAPHQL_URL
 
       - name: Set Variables
         run: |
@@ -69,8 +69,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script:  |
-            cd deployment
-            export GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }}
-            docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} |
-              grep -i rollback
+          script: GITHUB_SHA_SHORT=${{ env.GITHUB_SHA_SHORT }} docker service update deployment_deployment
+            --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
