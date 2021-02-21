@@ -14,8 +14,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script_stop: true
-          script: docker service update deployment_deployment --image=ivanduka/deployment:200 | grep -i rollback &&
-          exit 1 || echo "ALL GOOD"
+          script: docker service update deployment_deployment --image=ivanduka/deployment:200 | grep -i rollback \
+            && exit 1 || echo "ALL GOOD"
 
 #      - name: Set Variables
 #        run: |
