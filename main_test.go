@@ -5,5 +5,5 @@ import (
 )
 
 func TestFunc(t *testing.T) {
-	t.Error("Just an error")
+	//t.Error("Just an error")
 }

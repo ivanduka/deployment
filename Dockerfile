@@ -17,7 +17,9 @@ RUN go mod download
 
 COPY . .
 
-RUN go test ./... && go build -ldflags="-s -w" -race -o ./out/deployment.app . && upx ./out/deployment.app
+RUN go test ./...
+
+RUN go build -ldflags="-s -w" -race -o ./out/deployment.app . && upx ./out/deployment.app
 
 ###################################################
 # Building the healthcheck utility
