@@ -14,14 +14,14 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.GH_DOCKER_TOKEN }}
 
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
+          tags: ghcr.io/ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
           labels: timestamp=${{ env.CURRENT_TIMESTAMP }}
 
       - name: Deploy
@@ -32,7 +32,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker service update deployment_deployment --image=ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} > output
+            docker service update deployment_deployment \
+              --image=ghcr.io/ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} \
+              --with-registry-auth > output
             cat ./output
             echo # for extra line
 
