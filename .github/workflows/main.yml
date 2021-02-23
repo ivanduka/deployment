@@ -42,7 +42,7 @@ jobs:
             docker service ps deployment_deployment
             echo # for extra line
 
-            cat ./output | grep -i roll -q # only need status, not (0 or 1)
+            cat ./output | grep -i roll -q # only need status, not actual lines (0 or 1)
             export rollback=$?
             if [ $rollback = 1 ];
              then
