@@ -21,6 +21,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          registry: ghcr.io
           tags: ghcr.io/ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }}
           labels: timestamp=${{ env.CURRENT_TIMESTAMP }}
 
