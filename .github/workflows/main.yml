@@ -35,7 +35,7 @@ jobs:
           script: |
             docker service update deployment_deployment \
               --image=ghcr.io/ivanduka/deployment:${{ env.GITHUB_SHA_SHORT }} \
-              --with-registry-auth > output
+              --with-registry-auth | uniq > output
             cat ./output
             echo # for extra line
 
